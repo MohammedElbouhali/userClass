@@ -1,9 +1,12 @@
 <?php
 
-/*
-	@Desc: Programmed by Neorm 2O16/2O17
-	@Contact: https://www.facebook.com/gonniy.officiel
-*/
+
+#	@ Desc: 	Programmed by Neorm 2O16/2O17
+#	@ Contact: 	https://www.facebook.com/gonniy.officiel
+
+	#=========| Database Diagram |=========#
+	# id, username, password, email, level #
+	#======================================#
 
 class Database {
 
