@@ -32,20 +32,16 @@ $user->updateUser(1); // set the id of a particular user to updated his/her info
 #     That means we can use this method for check for an user via username solo Or check from
 #     the login page via both arguments(username, password), i will use just username to show you
 $user->username = 'Mohammed';
-( $user->isUser($user->username) ) ? echo 'User exists!' : echo 'User not exists!';
+echo $user->isUser($user->username) ? 'User exists!' : 'User not exists!';
 # =====================================================
 
 # ==================| deleteUser method |==================
 # [+] delete user via id .Excpect 1 argument($id)
-if($user->deleteUser(1)) {
-	echo 'The user has been deleted!';
-} else{
-	echo 'The user id not found.';
-}
+echo $user->deleteUser(1) ? 'The user has been deleted!' : 'The user id not found.';
 # ==========================================================
 
-if($user->gradedUser(3, 2)) {
-	echo 'The user updated level to moderator';
-} else{
-	echo 'shiit Static!';
-}
+# ==================| gradedUser method |==================
+# [+] update the status of an user and set it a moderator or admin ect...
+# [!] default value is (0) and it's mean a regular member
+echo $user->gradedUser(3, 2) ? 'The user updated level to moderator' : 'shiit Static!';
+# ==========================================================
