@@ -43,3 +43,9 @@ if($user->deleteUser(1)) {
 	echo 'The user id not found.';
 }
 # ==========================================================
+
+if($user->gradedUser(3, 2)) {
+	echo 'The user updated level to moderator';
+} else{
+	echo 'shiit Static!';
+}
