@@ -74,4 +74,10 @@ class User{
 		}
 	}
 
+	public function gradedUser($userId, $status) {
+		global $database;
+		$sql = "UPDATE {$this->_tableName} SET level= {$status} WHERE id= {$userId}";
+		return $database->handler->query($sql) ? true : false;
+	}
+
 }
