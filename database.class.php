@@ -26,7 +26,7 @@ class Database {
 	}
 
 	// connect with the database
-	public function connect() {
+	final public function connect() {
 		try{
 			$this->handler = new PDO('mysql:host='. $this->_dbHost .';dbname='. $this->_dbName,$this->_dbUser,$this->_dbPass);
 		}catch(PDOException $e) {

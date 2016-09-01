@@ -15,12 +15,39 @@ $database->connect();
 
 class User{
 
-	public $username; // decalred username
-	public $password; // declared password
-	public $email; 	  // declared email
+	private static $_username; // decalred username
+	private static $_password; // declared password
+	private static $_email; 	  // declared email
 	/*
 		@Notice: You can add more properties and set your database compatible with the class
 	*/
+
+	// set and get value from the username propertie
+	public static function setUsername($username) {
+		self::$_username = $username;
+	}
+
+	public static function getUsername() {
+		return self::_username !== null ? self::$_username : '';
+	}
+
+	// set and get value from the password propertie
+	public static function setPassword($password) {
+		self::$_password = $password;
+	}
+
+	public static function getPassword() {
+		return self::$_password !== null ? self::$_password : '';;
+	}
+
+	// set and get value from the email propertie
+	public static function setEmail($email) {
+		self::$_email = $email;
+	}
+
+	public static function getEmail() {
+		return self::$_email !== null ? self::$_email : '';
+	}
 
 	protected $_tableName; // table name
 
@@ -35,9 +62,9 @@ class User{
 		global $database;
 		$sql = "UPDATE {$this->_tableName} SET username= ?, password= ?, email= ? WHERE id= {$id}";
 		$query = $database->handler->prepare($sql);
-		$query->bindParam(1, $this->username);
-		$query->bindParam(2, $this->password);
-		$query->bindParam(3, $this->email);
+		$query->bindParam(1, self::$_username);
+		$query->bindParam(2, self::$_password);
+		$query->bindParam(3, self::$_email);
 		return $query->execute();
 	}
 
@@ -46,9 +73,9 @@ class User{
 		global $database;
 		$query = "INSERT INTO {$this->_tableName} (username, password, email) VALUES(?, ?, ?)";
 		$prepare = $database->handler->prepare($query);
-		$prepare->bindParam(1, $this->username);
-		$prepare->bindParam(2, $this->password);
-		$prepare->bindParam(3, $this->email);
+		$prepare->bindParam(1, self::$_username);
+		$prepare->bindParam(2, self::$_password);
+		$prepare->bindParam(3, self::$_email);
 		return $prepare->execute();
 	}
 
@@ -56,22 +83,14 @@ class User{
 	public function isUser($username, $password = null) {
 		global $database;
 		$sql = "SELECT * FROM {$this->_tableName} WHERE username = '$username' AND password= '$password'";
-		if($database->handler->query($sql)->rowCount() >= 1) {
-			return TRUE;
-		} else{
-			return FALSE;
-		}
+		return $database->handler->query($sql)->rowCount() >= 1 ? true : false;
 	}
 
 	// delete user
 	public function deleteUser($id) {
 		global $database;
 		$sql = "DELETE FROM {$this->_tableName} WHERE id= '$id'";
-		if($database->handler->exec($sql) >= 1) {
-			return TRUE;
-		} else{
-			return FALSE;
-		}
+		return $database->handler->exec($sql) >= 1 ? true : false;
 	}
 
 	public function gradedUser($userId, $status) {
